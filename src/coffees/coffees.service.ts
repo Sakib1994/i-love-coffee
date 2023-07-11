@@ -1,10 +1,12 @@
-import { HttpStatus, Injectable, NotFoundException} from '@nestjs/common';
+import { HttpStatus, Inject, Injectable, NotFoundException} from '@nestjs/common';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 import { Coffee } from './entities/coffee.entity';
+import { MYSQL_CONNECTION } from 'src/constants';
 
 @Injectable()
 export class CoffeesService {
+  constructor(@Inject(MYSQL_CONNECTION) private conn: any) {}
   private coffees: Coffee[] = [
     {
       id: 1,
@@ -21,7 +23,8 @@ export class CoffeesService {
 
   findAll() {
     // findAll(limit, offset) {
-    return this.coffees;
+    // return this.coffees;
+    return this.conn.query.countries.findMany();
   }
 
   findOne(id: number) {
