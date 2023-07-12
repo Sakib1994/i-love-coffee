@@ -9,14 +9,11 @@ export class CoffeesController {
 
   @Post()
   create(@Body() createCoffeeDto: CreateCoffeeDto) {
-    console.log(createCoffeeDto instanceof CreateCoffeeDto);
     return this.coffeesService.create(createCoffeeDto);
   }
 
   @Get()
   findAll(@Query() paginationQuery) {
-    // const {limit, offset}=paginationQuery;
-    // return this.coffeesService.findAll(limit, offset);
     return this.coffeesService.findAll();
   }
 
